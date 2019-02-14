@@ -1,4 +1,4 @@
-package com.hhs.xiaomao.modloader.annotation;
+package com.hhs.zzzyt.modloader.annotation;
 
 import java.lang.annotation.*;
 

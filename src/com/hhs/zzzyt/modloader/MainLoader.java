@@ -1,4 +1,4 @@
-package com.hhs.xiaomao.modloader;
+package com.hhs.zzzyt.modloader;
 
 import java.io.File;
 import java.net.URL;
@@ -12,9 +12,9 @@ import java.util.NoSuchElementException;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import com.hhs.xiaomao.modloader.annotation.Mod;
-import com.hhs.xiaomao.modloader.exception.UnformattedModIDException;
-import com.hhs.xiaomao.modloader.exception.UnformattedModVersionException;
+import com.hhs.zzzyt.modloader.annotation.Mod;
+import com.hhs.zzzyt.modloader.exception.UnformattedModIDException;
+import com.hhs.zzzyt.modloader.exception.UnformattedModVersionException;
 
 /**
  * 
@@ -37,7 +37,7 @@ public class MainLoader {
 	public static void main(String[] args) {
 		//TEST AREA
 		//System.out.println(("10.00.00").split("\\p{Punct}.")[0]);
-		System.out.println(getFormatName("mod1/ClassA.class"));
+		//System.out.println(getFormatName("mod1/ClassA.class"));
 		
 		// This is where jar files are stored
 		File ModJarDir = new File("D:/MyJava/ModLoader/bin/Mods/");
