@@ -11,6 +11,11 @@ You should edit the class ModInit (Or extend it) to add your own methods to it.
 
 Then, pack the modified class together with all other classes to a jar file ("ModLoader.jar" in this example) and distribute it to modders.
 
+<br>
+You can put mods in a directory and call the load() method.
+
+*p.s. The main method is just for debugging*
+
 ###For modders
 You should first import the distributed jar file as a library.
 

@@ -24,7 +24,7 @@ import com.hhs.zzzyt.modloader.exception.UnformattedModVersionException;
  * It is also used as an API.
  * 
  * @version 1.1.0
- * @author XiaoMao205
+ * @author Zzzyt
  * 
  */
 public class MainLoader {
@@ -35,12 +35,21 @@ public class MainLoader {
 	static Map<String, String> ModVersions = new HashMap<String, String>();
 
 	public static void main(String[] args) {
-		//TEST AREA
-		//System.out.println(("10.00.00").split("\\p{Punct}.")[0]);
-		//System.out.println(getFormatName("mod1/ClassA.class"));
-		
-		// This is where jar files are stored
-		File ModJarDir = new File("D:/MyJava/ModLoader/bin/Mods/");
+		load(new File("mods"));
+	}
+	
+	/**
+	 * Load the mods!
+	 * 
+	 * @param ModJarDir The directory where the mods are stored
+	 */
+	public static void load(File ModJarDir) {
+		// TEST AREA
+		// System.out.println(("10.00.00").split("\\p{Punct}.")[0]);
+		// System.out.println(getFormatName("mod1/ClassA.class"));
+
+		if (!ModJarDir.exists())
+			ModJarDir.mkdirs();
 		File[] ModPaths = ModJarDir.listFiles();
 
 		List<ClassLoader> Loaders = new ArrayList<ClassLoader>();
@@ -109,7 +118,7 @@ public class MainLoader {
 
 								checkModVersionFormat(CurrentModVersion);
 								checkModIDFormat(CurrentModID);
-								
+
 								ModIDs.add(CurrentModID);
 								ModNames.put(JarName, CurrentModName);
 								ModVersions.put(JarName, CurrentModVersion);
@@ -135,9 +144,8 @@ public class MainLoader {
 		}
 
 		// Init
-		System.out.println("========Init Mods========");
+		System.out.println("\n----------------Init Mods----------------");
 		for (int i = 0; i < InitClasses.size(); i++) {
-
 			ModInit CurrentMod = null;
 			try {
 				// Create instance of mod init class
@@ -147,11 +155,10 @@ public class MainLoader {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			System.out.println("\n\n");
 		}
-
+		System.out.println("----------------Init  End----------------");
 	}
-
-
 
 	/**
 	 * 
@@ -160,10 +167,8 @@ public class MainLoader {
 	 * In this format: <br>
 	 * <code>getModClass("TestMod","com.hhs.xiaomao.ModClass1")</code>
 	 * 
-	 * @param ModID
-	 *            ID of the mod.
-	 * @param ClassName
-	 *            Name of the queried class.
+	 * @param ModID     ID of the mod.
+	 * @param ClassName Name of the queried class.
 	 * @return
 	 */
 	public static Class<?> getModClass(String ModID, String ClassName) {
@@ -173,8 +178,7 @@ public class MainLoader {
 	/**
 	 * Check whether a mod is loaded.
 	 * 
-	 * @param ModID
-	 *            Mod ID of the querying mod.
+	 * @param ModID Mod ID of the querying mod.
 	 * @return Whether the mod is loaded.
 	 */
 	public static boolean isModLoaded(String ModID) {
@@ -196,8 +200,7 @@ public class MainLoader {
 	 * <i>Actually use mod ID is better than mod name,because mod name may not be
 	 * formatted.</i>
 	 * 
-	 * @param ModID
-	 *            Mod ID of the the querying mod.
+	 * @param ModID Mod ID of the the querying mod.
 	 * @return Name of the mod.
 	 */
 	public static String getModName(String ModID) {
@@ -207,8 +210,7 @@ public class MainLoader {
 	/**
 	 * Get version of mod by mod ID.
 	 * 
-	 * @param ModID
-	 *            Mod ID of the the querying mod.
+	 * @param ModID Mod ID of the the querying mod.
 	 * @return Version of the mod.
 	 */
 	public static String getModVersion(String ModID) {
@@ -231,14 +233,11 @@ public class MainLoader {
 	 * Where you can change the symbol '>' to '<','<=','>=','==','!=' to do the
 	 * comperation.
 	 * 
-	 * @param Version1
-	 *            The first verion to compare.
-	 * @param Version2
-	 *            The second verion to compare.
+	 * @param Version1 The first verion to compare.
+	 * @param Version2 The second verion to compare.
 	 * @return Result of the comperation.
 	 * 
-	 * @throws UnformattedModVersionException
-	 *             while given unformatted mod version.
+	 * @throws UnformattedModVersionException while given unformatted mod version.
 	 * 
 	 * @see String#compareTo(String)
 	 */
@@ -295,13 +294,11 @@ public class MainLoader {
 	 * Same as:<br>
 	 * <code>versionCompare(Version1, VersionToCompare) >= 0</code>
 	 * 
-	 * @param Version1
-	 *            Your version.
-	 * @param VersionToCompare
-	 *            Version to compare.
+	 * @param Version1         Your version.
+	 * @param VersionToCompare Version to compare.
 	 * @return Whether your version is later than <strong>or equal to</strong> the
 	 *         version to compare.
-	 *         
+	 * 
 	 * @see MainLoader#versionCompare(String, String)
 	 */
 	public static boolean isLaterVersion(String Version1, String VersionToCompare) {
@@ -321,8 +318,7 @@ public class MainLoader {
 	 * <br>
 	 * <code>getFormatName("mod1/ClassA.class") = "mod1.ClassA"</code>
 	 * 
-	 * @param FullName
-	 *            URL of a resource in a jar file.
+	 * @param FullName URL of a resource in a jar file.
 	 * @return Fromated name of this resource.
 	 */
 	private static String getFormatName(String FullName) {
@@ -332,8 +328,7 @@ public class MainLoader {
 	/**
 	 * Get the anem of a jar file (without extension name).
 	 * 
-	 * @param FullName
-	 *            Full path to the jar file.
+	 * @param FullName Full path to the jar file.
 	 * @return Name of the jar file.
 	 */
 	private static String getJarName(String FullName) {
@@ -344,8 +339,7 @@ public class MainLoader {
 	/**
 	 * Clear the extension name from a file name.
 	 * 
-	 * @param FileName
-	 *            Full file name.
+	 * @param FileName Full file name.
 	 * @return File name after clearing.
 	 */
 	private static String getNoExtensionName(String FileName) {
@@ -356,17 +350,19 @@ public class MainLoader {
 		}
 		return FileName;
 	}
-	
+
 	/**
 	 * Check if a mod version is formatted.<br>
 	 * Throws an exception if not formatted.
+	 * 
 	 * @param ModVersion Mod version to check.
 	 * 
-	 * @throws UnformattedModVersionException while the mod version is not formatted.
+	 * @throws UnformattedModVersionException while the mod version is not
+	 *                                        formatted.
 	 */
 	private static void checkModVersionFormat(String ModVersion) {
 		String SubVersion[] = ModVersion.split("\\.");
-		
+
 		if (SubVersion.length != 3) {
 			throw (new UnformattedModVersionException(ModVersion));
 		}
@@ -381,23 +377,25 @@ public class MainLoader {
 		if (a1 < 0 || b1 < 0 || c1 < 0) {
 			throw (new UnformattedModVersionException(ModVersion));
 		}
-		
+
 	}
-	
+
 	/**
 	 * Check if a mod ID is formatted.<br>
 	 * Throws an exception if not formatted.
+	 * 
 	 * @param ModID Mod ID to check.
 	 * 
 	 * @throws UnformattedModIDException while te mod ID is not formatted.
 	 */
 	private static void checkModIDFormat(String ModID) {
-		for(int i=0;i<ModID.length();i++) {
-			if(!(('0'<=ModID.charAt(i)&&ModID.charAt(i)<='9')||('a'<=ModID.charAt(i)&&ModID.charAt(i)<='z')||('A'<=ModID.charAt(i)&&ModID.charAt(i)<='Z'))) {
+		for (int i = 0; i < ModID.length(); i++) {
+			if (!(('0' <= ModID.charAt(i) && ModID.charAt(i) <= '9')
+					|| ('a' <= ModID.charAt(i) && ModID.charAt(i) <= 'z')
+					|| ('A' <= ModID.charAt(i) && ModID.charAt(i) <= 'Z'))) {
 				throw (new UnformattedModIDException(ModID));
 			}
 		}
 	}
-
 
 }
