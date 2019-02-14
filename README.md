@@ -1,12 +1,14 @@
-# General ModLoader
+# General ModLoader #
 By Zzzyt 2018
 
 A general mod loader for all applications
 
 Made with Java SE8
 
-##Usage
-###For developers
+# Usage 
+
+## For developers 
+
 You should edit the class ModInit (Or extend it) to add your own methods to it.
 
 Then, pack the modified class together with all other classes to a jar file ("ModLoader.jar" in this example) and distribute it to modders.
@@ -16,7 +18,8 @@ You can put mods in a directory and call the load() method.
 
 *p.s. The main method is just for debugging*
 
-###For modders
+## For modders
+
 You should first import the distributed jar file as a library.
 
 Then, you can create a class that extends the ModInit class (or any other name the developer gives) and impelment the abstract methods.
@@ -36,7 +39,8 @@ You can check their versions in the init() method to deal with requirements.
 
 *Little Tip:Some helper methods in ModLoader class may help to check*
 
-##Changelog
+# Changelog
+
 **2019/2/14**
 
 -I changed my name from "XiaoMao205" to "Zzzyt" so I updated the package names.
