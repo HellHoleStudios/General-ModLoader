@@ -1,4 +1,4 @@
-package com.hhs.xiaomao.modloader;
+package com.hhs.zzzyt.modloader;
 
 public abstract class ModInit {
 	public abstract void init();

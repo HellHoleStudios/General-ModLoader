@@ -1,4 +1,4 @@
-package com.hhs.xiaomao.modloader.exception;
+package com.hhs.zzzyt.modloader.exception;
 
 /**
  * 
